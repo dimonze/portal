@@ -5,9 +5,11 @@ namespace Portal\MainPageBundle\Controller;
 use DOMDocument;
 use DOMXPath;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Portal\MainPageBundle\Entity\Movie;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class DefaultController extends Controller
 {
@@ -27,8 +29,28 @@ class DefaultController extends Controller
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 18)
         );
-
         return $this->render('PortalMainPageBundle:Default:index.html.twig', array('movies' => $result));
+    }
+
+    public function fileUploader()
+    {
+        $file = new UploadedFile('/var/www/html/portal/web/images/posters/1.jpg', 'image.jpg', null, null, null, true);
+
+        $movie = new Movie();
+        $movie->setUniqueName("Test_Dima");
+        $movie->setNameEn("Test_dima");
+        $movie->setPosterImageFile($file);
+        $movie->setPosterImageName("testImage");
+        //$movie->setPoster();
+        //$movie->setYear($movieYear);
+
+        $em = $this->getDoctrine()->getManager();
+
+        // tells Doctrine you want to (eventually) save the Product (no queries yet)
+        $em->persist($movie);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $em->flush();
     }
 
     public function updateAction()
@@ -60,6 +82,12 @@ class DefaultController extends Controller
             $movie->setUniqueName($movieNameEn . " " . $movieYear);
             $uniqueArray[] = $movie->getUniqueName();
             $movie->setNameEn($movieNameEn);
+            echo($poster);
+            //return new Response(' ');
+            file_put_contents('/var/www/html/portal/web/images/posters/1.jpg', file_get_contents($poster));
+            $file = new UploadedFile('/var/www/html/portal/web/images/posters/1.jpg', 'image'.$i.'.jpg', null, null, null, true);
+            $movie->setPosterImageFile($file);
+            $movie->setPosterImageName("testImage". $i);
             $movie->setPoster($poster);
             $movie->setYear($movieYear);
 
@@ -157,20 +185,17 @@ class DefaultController extends Controller
             $movieNameEn = array_key_exists(1, $name) ? $name[1] : null;
             $movieNameRu = $resultUriRu[$i]->textContent;
 
-            if (strlen($movieNameEn) < 2 || is_null($movieNameEn))
-            {
+            if (strlen($movieNameEn) < 2 || is_null($movieNameEn)) {
                 $movieNameEn = $movieNameRu;
             }
 
             if (in_array($movieNameEn . " " . $movieYear, $uniqueArray)) {
 
-                $movieYear = $movieYear .$i;
+                $movieYear = $movieYear . $i;
 
 
-
-                $movieNameEn = $movieNameEn .$i;
+                $movieNameEn = $movieNameEn . $i;
             }
-
 
 
             $movie = new Movie();
@@ -180,10 +205,6 @@ class DefaultController extends Controller
             $movie->setDuration($movieDuration);
             $movie->setNameEn($movieNameEn);
             $movie->setNameRu($movieNameRu);
-
-
-
-
 
 
             $em = $this->getDoctrine()->getManager();

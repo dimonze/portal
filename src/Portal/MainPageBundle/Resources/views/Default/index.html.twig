@@ -7,8 +7,8 @@
     {% for movie in movies %}
         <div class="movie">
             {#<div class="movie_image" style="background-image: url('{{ movie.getPoster() }}')"></div>#}
-            <img class="movie_poster" data-id="{{ movie.getId }}" src="{{ movie.getPoster() }}">
-
+            <img class="movie_poster" data-id="{{ movie.getId }}" src="{{ vich_uploader_asset(movie, 'posterImageFile') }}">
+            {#<img src="{{ vich_uploader_asset(movie, 'posterImageFile') }}" alt="" />#}
             <p class="movie_title">
                 {{ movie.getNameEn }}
             </p>
@@ -20,14 +20,14 @@
 <div class="details" id="details">
     {% for movie in movies %}
         <div class="movie_details hidden" id="{{ movie.getId }}">
-            <img class="image" src="{{ movie.getPoster() }}">
+            <img class="image" src="{{ vich_uploader_asset(movie, 'posterImageFile') }}">
             <div class="info">
                 <p class="desc">Название: {{ movie.getNameEn }}</p>
                 <p>Жанр: {{ movie.getGenre }}</p>
                 <p>Год: {{ movie.getYear }}</p>
                 <p>Страна: {{ movie.getCountry }}</p>
                 <p>Режиссёр: {{ movie.getProducer }}</p>
-                <p>Продолжительность: {{ movie.getDuration }}</p>
+                <p>Продолжительность: {{ movie.getDuration }} мин</p>
                 <br>
                 <br>
                 <br>

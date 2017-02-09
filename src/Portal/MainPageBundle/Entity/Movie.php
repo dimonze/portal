@@ -3,12 +3,15 @@
 namespace Portal\MainPageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Movie
  *
  * @ORM\Table(name="movie")
  * @ORM\Entity(repositoryClass="Portal\MainPageBundle\Repository\MovieRepository")
+ * @Vich\Uploadable
  */
 class Movie
 {
@@ -195,6 +198,105 @@ class Movie
      * @ORM\Column(name="trailer", type="string", length=500, nullable=true)
      */
     private $trailer;
+
+
+    /**
+     *
+     * @Vich\UploadableField(mapping="posters_image", fileNameProperty="posterImageName")
+     *
+     * @var File
+     */
+    private $posterImageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $posterImageName;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Movie
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Movie
+     */
+    public function setPosterImageFile(File $image = null)
+    {
+        $this->posterImageFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getPosterImageFile()
+    {
+        return $this->posterImageFile;
+    }
+
+    /**
+     * @param string $posterImageName
+     *
+     * @return Movie
+     */
+    public function setPosterImageName($posterImageName)
+    {
+        $this->posterImageName = $posterImageName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPosterImageName()
+    {
+        return $this->posterImageName;
+    }
 
     /**
      * Get id

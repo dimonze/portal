@@ -81,3 +81,14 @@ knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        posters_image:
+            uri_prefix:         /images/posters
+            upload_destination: '%kernel.root_dir%/../web/images/posters'
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
