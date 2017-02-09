@@ -1,0 +1,26 @@
+.content.mobile {
+    display: inline-block;
+}
+
+.details.mobile {
+    /*background: transparent;*/
+    position: fixed;
+    background-color: snow;
+    width: 90%;
+    height: 90%;
+    top: 5%;
+    left: 5%;
+    right:5%;
+    bottom: 5%;
+    margin: 25px 0 0 -35px;
+    opacity: 0.9;
+    border-radius: 5px;
+}
+.movie_details.mobile {
+    font-weight: bold;
+    align-content: center;
+    position: fixed;
+    margin: 5px 5px 5px 5px;
+    width: 89%;
+    height: 89%;
+}

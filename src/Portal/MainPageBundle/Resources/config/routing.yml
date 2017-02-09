@@ -1,0 +1,14 @@
+portal_main_page_homepage:
+    path:     /
+    defaults: { _controller: PortalMainPageBundle:Default:index }
+
+portal_main_page_update:
+    path:     /update
+    defaults: { _controller: PortalMainPageBundle:Default:update }
+
+portal_main_page_test:
+    path:     /test
+    defaults: { _controller: PortalMainPageBundle:Default:test }
+portal_main_page_kino:
+    path:     /kino
+    defaults: { _controller: PortalMainPageBundle:Default:kino }
