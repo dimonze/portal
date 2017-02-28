@@ -202,14 +202,14 @@ class Movie
 
     /**
      *
-     * @Vich\UploadableField(mapping="posters_image", fileNameProperty="posterImageName")
+     * @Vich\UploadableField(mapping="posters_image", fileNameProperty="posterImageName", nullable=true)
      *
      * @var File
      */
     private $posterImageFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @var string
      */
@@ -221,6 +221,14 @@ class Movie
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="idKinopoisk_TEMP", type="string", length=255, nullable=true)
+     */
+    private $idKinopoisk_TEMP;
+
 
     /**
      * Set updatedAt
@@ -906,5 +914,29 @@ class Movie
     public function getRatingImdbVoteCount()
     {
         return $this->ratingImdbVoteCount;
+    }
+
+    /**
+     * Set idKinopoiskTEMP
+     *
+     * @param string $idKinopoiskTEMP
+     *
+     * @return Movie
+     */
+    public function setIdKinopoiskTEMP($idKinopoiskTEMP)
+    {
+        $this->idKinopoisk_TEMP = $idKinopoiskTEMP;
+
+        return $this;
+    }
+
+    /**
+     * Get idKinopoiskTEMP
+     *
+     * @return string
+     */
+    public function getIdKinopoiskTEMP()
+    {
+        return $this->idKinopoisk_TEMP;
     }
 }

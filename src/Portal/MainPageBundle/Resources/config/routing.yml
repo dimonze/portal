@@ -12,3 +12,15 @@ portal_main_page_test:
 portal_main_page_kino:
     path:     /kino
     defaults: { _controller: PortalMainPageBundle:Default:kino }
+portal_main_page_posters:
+    path:     /posters
+    defaults: { _controller: PortalMainPageBundle:Default:posters }
+portal_main_page_world:
+    path:     /world
+    defaults: { _controller: PortalMainPageBundle:Default:world }
+portal_main_page_idKinopoisk:
+    path:     /idKinopoisk
+    defaults: { _controller: PortalMainPageBundle:Default:idKinopoisk }
+portal_main_page_getInfo:
+    path:     /getInfo
+    defaults: { _controller: PortalMainPageBundle:Default:getInfo }
