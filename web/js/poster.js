@@ -31,10 +31,10 @@ $(document).ready(function () {
 
     });
 
-    // $.get("http://kinokrad.co/301550-pod-pokrovom-nochi.html", function( data ) {
-    //     $( "#trailer" ).html( data );
-    //     //alert( "Load was performed." );
-    // });
+     $.get("http://kinokrad.co/301550-pod-pokrovom-nochi.html", function( data ) {
+         $( "#trailer" ).html( data );
+         //alert( "Load was performed." );
+     });
 
     //
     //
