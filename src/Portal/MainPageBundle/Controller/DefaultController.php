@@ -269,16 +269,6 @@ class DefaultController extends Controller
 //            return new Response(' ');
         }
 
-//            $em = $this->getDoctrine()->getManager();
-//
-//            // tells Doctrine you want to (eventually) save the Product (no queries yet)
-//            $em->persist($movie);
-//
-//            // actually executes the queries (i.e. the INSERT query)
-//            $em->flush();
-
-
-//        return new Response(' ');
     }
 
     public function worldAction()
